@@ -2,7 +2,6 @@
 
 import { Directive, Input, AfterViewInit, OnChanges, ElementRef, SimpleChange } from '@angular/core';
 import * as ol from 'openlayers';
-import { ConfigurationService } from '../../services/configuration-service';
 
 @Directive({
   selector: '[openlayers]'
@@ -17,11 +16,11 @@ export class OpenlayersDirective implements AfterViewInit {
   private vectorLayer: ol.layer.Vector;
 
   // https://openlayersbook.github.io/index.html
-  constructor(private elementRefHoldingOpenlayersMap: ElementRef, configurationService: ConfigurationService) {
+  constructor(private elementRefHoldingOpenlayersMap: ElementRef) {
     this.initialViewOnDelft = new ol.View({
-      projection: configurationService.getProjection(),
-			center: configurationService.getInitialLocationOnMap(),
-			zoom: 13
+      projection: 'EPSG:3857',
+      center: [485805.441269, 6800029.672986],
+      zoom: 13
         });
 
     this.vectorLayer = new ol.layer.Vector();
